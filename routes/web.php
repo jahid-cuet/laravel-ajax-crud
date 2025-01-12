@@ -21,9 +21,14 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/add-user', function () {
-    return view('form');
+    return view('form');                // This is for showing the form 
+});
+
+Route::get('/get-student', function () {
+    return view('getStudent');                // This is for showing the table of all student page 
 });
 
 
-Route::post('add-student',[StudentController::class,'addStudent'])->name('addStudent');
+Route::post('add-student',[StudentController::class,'addStudent'])->name('addStudent');  // Added the Student 
+Route::get('get-all-student',[StudentController::class,'getStudent'])->name('getStudent');  // Added the Student 
 require __DIR__.'/auth.php';

@@ -23,4 +23,12 @@ class StudentController extends Controller
 
        return response()->json(['result' => 'Student Created Successfully']);
     }
+
+
+    public function getStudent()
+    {
+    $students=Student::all();
+
+       return response()->json(['students' => $students]);
+    }
 }

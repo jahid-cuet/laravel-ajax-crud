@@ -44,7 +44,7 @@
         <input type="submit" value="Add Student" id='btnSubmit'>
     </form>
 
-
+<br>
     <span id="output">
 
     </span>
@@ -70,6 +70,12 @@
             success: function (d) {
                 $("#output").text(d.result)
                 $("#btnSubmit").prop('disabled',false);  //If any error occurs then enabled the button     
+           
+
+                $("input[type='text']").val('');
+                $("input[type='email']").val('');   //Empty the form value after form submitted done
+                $("input[type='file']").val('');
+
             },
             error:function(e){
                 $("#output").text(d.result);
