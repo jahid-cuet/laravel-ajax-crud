@@ -51,6 +51,9 @@
                             <img src="{{asset('storage/`+img+ `')}}"  alt="` + img + `" width="100px" height="100px">
                             </td>  
                             
+                             <td><a href="edit-student/`+(data.students[i]['id'])+`">Edit</a></td>
+
+
                         </tr>`);
                     }
                 }
