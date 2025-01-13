@@ -51,7 +51,11 @@
                             <img src="{{asset('storage/`+img+ `')}}"  alt="` + img + `" width="100px" height="100px">
                             </td>  
                             
-                             <td><a href="edit-student/`+(data.students[i]['id'])+`">Edit</a></td>
+                             <td>
+                                <a href="edit-student/`+(data.students[i]['id'])+`">Edit</a>
+                                <a href="#" class="deleteData" data-id= "`+(data.students[i]['id'])+`">Delete</a>
+                                
+                                </td>
 
 
                         </tr>`);
@@ -72,8 +76,28 @@
             }
 
             });
+
+    $("#students-table").on("click",".deleteData",function () {
+    
+
+        var id = $(this).attr("data-id");
+        var obj = $(this);
+
+        $.ajax({
+            type: "GET",
+            url: "delete-student/"+id,
+            success: function (data) {
+                $(obj).parent().parent().remove();
+                $("#output").text(data.result);
+                },
+
+                error:function(err){
+                    console.log(err.responseText);
+                }
         });
+});
+ });
         
-    </script>
+</script>
 </body>
 </html>

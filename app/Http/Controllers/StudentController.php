@@ -50,10 +50,6 @@ class StudentController extends Controller
     public function updateStudent(Request $request)
     {
 
-
-
-  
-
     $student=Student::find($request->id);
 
     $student->name=$request->name;
@@ -72,5 +68,15 @@ if($request->file('file'))
     $student->save();
 
        return response()->json(['result' => 'Student Updated Successfully']);
+    }
+
+
+
+    public function deleteStudent($id)
+    {
+
+       $student=Student::where('id',$id)->delete();
+
+       return response()->json(['result' => 'Student Deleted Successfully']);
     }
 }

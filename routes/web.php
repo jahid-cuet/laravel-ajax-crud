@@ -32,4 +32,5 @@ Route::post('add-student',[StudentController::class,'addStudent'])->name('addStu
 Route::get('get-all-student',[StudentController::class,'getStudent'])->name('getStudent');  // Added the Student 
 Route::get('edit-student/{id}',[StudentController::class,'editStudent'])->name('editStudent');  // Added the Student 
 Route::post('update-student',[StudentController::class,'updateStudent'])->name('updateStudent');  // Added the Student 
+Route::get('delete-student/{id}',[StudentController::class,'deleteStudent'])->name('deleteStudent');  // Added the Student 
 require __DIR__.'/auth.php';
