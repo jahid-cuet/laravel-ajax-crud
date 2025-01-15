@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -79,4 +80,49 @@ if($request->file('file'))
 
        return response()->json(['result' => 'Student Deleted Successfully']);
     }
+
+
+
+    public function searchStudent(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Student::where('name', 'LIKE','%' .$request->name . '%')->get();
+            $output = '';
+    
+            if (count($data) > 0) {
+                $output = '<ul class="list-group" style="display:block; position:relative; z-index:1">';
+    
+                foreach ($data as $row) {
+                    $output .= '<li class="list-group-item">' . $row->name . '</li>';
+                }
+                $output .= '</ul>';
+            }
+             else {
+                $output .= '<li class="list-group-item">No Data Found</li>';
+            }
+    
+            return $output;
+        }
+    
+        return view('search');
+    }
+
+
+
+    public function userSearch(Request $request)
+    {
+
+        $query=User::query();
+
+        if ($request->ajax()) {
+            $users = $query->where('name', 'LIKE','%' .$request->search. '%')
+            ->orWhere('email', 'LIKE','%' .$request->search. '%')
+            ->get();
+            return response()->json(['users'=>$users]);
+        }
+
+        $users=$query->get();
+        return view('userSearch', compact('users'));
+    }
+    
 }
