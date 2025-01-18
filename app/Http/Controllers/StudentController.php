@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Product;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -83,6 +85,8 @@ if($request->file('file'))
 
 
 
+
+
     public function searchStudent(Request $request)
     {
         if ($request->ajax()) {
@@ -109,6 +113,9 @@ if($request->file('file'))
 
 
 
+
+
+
     public function userSearch(Request $request)
     {
 
@@ -123,6 +130,36 @@ if($request->file('file'))
 
         $users=$query->get();
         return view('userSearch', compact('users'));
+    }
+
+
+
+    public function filterProduct(Request $request)
+    {
+
+       $query=Product::query();
+       $categories=Category::all();
+
+
+       if($request->ajax()){
+
+        if (empty($request->category)) {
+
+            $products = $query->get();
+
+        }
+        
+        else {
+
+            $products= $query->where(['category_id'=>$request->category])->get();
+        }
+
+        return response()->json(['products'=> $products]);
+       }
+
+       $products = $query->get();
+
+       return view('filterProduct',compact('categories','products'));
     }
     
 }

@@ -33,6 +33,11 @@ Route::get('get-all-student',[StudentController::class,'getStudent'])->name('get
 Route::get('edit-student/{id}',[StudentController::class,'editStudent'])->name('editStudent');  // Added the Student 
 Route::post('update-student',[StudentController::class,'updateStudent'])->name('updateStudent');  // Added the Student 
 Route::get('delete-student/{id}',[StudentController::class,'deleteStudent'])->name('deleteStudent');  // Added the Student 
+
 Route::get('search',[StudentController::class,'searchStudent'])->name('search');  // search a student to get
-Route::get('users-search',[StudentController::class,'userSearch'])->name('userSearch');  // search a student to get
+
+Route::get('users-search',[StudentController::class,'userSearch'])->name('userSearch');  // search multiple stuent to get
+
+
+Route::get('filter',[StudentController::class,'filterProduct'])->name('filter');  // search multiple stuent to get
 require __DIR__.'/auth.php';
