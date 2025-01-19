@@ -40,4 +40,10 @@ Route::get('users-search',[StudentController::class,'userSearch'])->name('userSe
 
 
 Route::get('filter',[StudentController::class,'filterProduct'])->name('filter');  // search multiple stuent to get
-require __DIR__.'/auth.php';
+
+
+Route::controller(StudentController::class)->group(function(){
+Route::get('file-upload','index');
+Route::post('file-upload','store')->name('file.store');
+
+});

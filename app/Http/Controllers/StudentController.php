@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Product;
 use App\Models\Student;
 use App\Models\User;
@@ -161,5 +162,24 @@ if($request->file('file'))
 
        return view('filterProduct',compact('categories','products'));
     }
+
+
+    public function index(){
+
+        return view('file-upload');
+    }
+    public function store(Request $request){
+
+        $request->validate([
+            'file'=>'required|mimes:jpg,png|max:2048',
+        ]);
+        $fileName=time().'.'.$request->file->extension();
+        $request->file->move(public_path('file'),$fileName);
+
+        Image::create(['name'=>$fileName]);
+
+        return response()->json(['File uploaded Successfully']);
+    }
+   
     
 }
